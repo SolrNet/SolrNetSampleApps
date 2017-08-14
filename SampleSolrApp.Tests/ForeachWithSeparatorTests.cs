@@ -16,31 +16,30 @@
 
 using System;
 using System.Linq;
-using MbUnit.Framework;
+using Xunit;
 using SampleSolrApp.Helpers;
 
 namespace SampleSolrApp.Tests {
-    [TestFixture]
     public class ForeachWithSeparatorTests {
-        [Test]
+        [Fact]
         public void Elements() {
             var r = HtmlHelperRepeatExtensions.RepeatF(null, Enumerable.Range(0, 5), i => i.ToString(), () => " | ");
-            Assert.AreEqual("0 | 1 | 2 | 3 | 4", r);
+            Assert.Equal("0 | 1 | 2 | 3 | 4", r);
         }
 
-        [Test]
+        [Fact]
         public void Empty() {
             var r = HtmlHelperRepeatExtensions.RepeatF(null, Enumerable.Empty<int>(), i => i.ToString(), () => " | ");
-            Assert.AreEqual("", r);
+            Assert.Equal("", r);
         }
 
-        [Test]
+        [Fact]
         public void Null() {
             var r = HtmlHelperRepeatExtensions.RepeatF<int>(null, null, i => i.ToString(), () => " | ");
-            Assert.AreEqual("", r);
+            Assert.Equal("", r);
         }
 
-        [Test]
+        [Fact]
         public void ElementsAction() {
             HtmlHelperRepeatExtensions.Repeat(null, Enumerable.Range(0, 5), Console.Write, () => Console.Write(" | "));
         }

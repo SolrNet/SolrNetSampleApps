@@ -297,3 +297,9 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+/SampleSolrApp/SolrNet.chm
+/SampleSolrApp/log.txt
+/SampleSolrApp/changelog.txt
+/SampleSolrApp.Tests/SolrNet.chm
+/SampleSolrApp.Tests/changelog.txt
