@@ -15,13 +15,12 @@
 #endregion
 
 using System.Linq;
-using MbUnit.Framework;
+using Xunit;
 using SampleSolrApp.Models;
 
 namespace SampleSolrApp.Tests {
-    [TestFixture]
     public class PaginationTests {
-        [Test]
+        [Fact]
         public void tt() {
             var info = new PaginationInfo {
                 CurrentPage = 8,
@@ -31,12 +30,12 @@ namespace SampleSolrApp.Tests {
             };
 
             var pages = info.Pages.ToArray();
-            Assert.AreEqual(9, pages.Length);
-            Assert.AreEqual(4, pages[0]);
-            Assert.AreEqual(12, pages.Last());
+            Assert.Equal(9, pages.Length);
+            Assert.Equal(4, pages[0]);
+            Assert.Equal(12, pages.Last());
         }
 
-        [Test]
+        [Fact]
         public void tt2() {
             var info = new PaginationInfo {
                 CurrentPage = 1,
@@ -46,9 +45,9 @@ namespace SampleSolrApp.Tests {
             };
 
             var pages = info.Pages.ToArray();
-            Assert.AreEqual(5, pages.Length);
-            Assert.AreEqual(1, pages[0]);
-            Assert.AreEqual(5, pages.Last());
+            Assert.Equal(5, pages.Length);
+            Assert.Equal(1, pages[0]);
+            Assert.Equal(5, pages.Last());
         }
     }
 }

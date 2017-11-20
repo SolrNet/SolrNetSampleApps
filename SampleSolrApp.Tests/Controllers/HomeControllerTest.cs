@@ -14,16 +14,15 @@
 // limitations under the License.
 #endregion
 
-using MbUnit.Framework;
+using Xunit;
 using Moroco;
 using SampleSolrApp.Controllers;
 using SampleSolrApp.Models;
 using SolrNet;
 
 namespace SampleSolrApp.Tests.Controllers {
-    [TestFixture]
     public class HomeControllerTest {
-        [Test]
+        [Fact]
         public void Index_Without_parameters() {
             var solr = new MSolrReadOnlyOperations<Product>();
             solr.query &= x => x.Return(new SolrQueryResults<Product>());
@@ -31,7 +30,7 @@ namespace SampleSolrApp.Tests.Controllers {
             var result = c.Index(new SearchParameters());   
         }
 
-        [Test]
+        [Fact]
         public void Facets() {
             
         }

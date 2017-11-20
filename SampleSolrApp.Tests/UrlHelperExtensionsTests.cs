@@ -16,121 +16,120 @@
 
 using System;
 using System.Collections.Generic;
-using MbUnit.Framework;
+using Xunit;
 using SampleSolrApp.Helpers;
 
 namespace SampleSolrApp.Tests {
-    [TestFixture]
     public class UrlHelperExtensionsTests {
 
-        [Test]
+        [Fact]
         public void ParseQueryString_empty() {
             var d = UrlHelperExtensions.ParseQueryString("");
-            Assert.AreEqual(0, d.Count);
+            Assert.Equal(0, d.Count);
         }
 
-        [Test]
+        [Fact]
         public void ParseQueryString_null() {
             var d = UrlHelperExtensions.ParseQueryString(null);
-            Assert.AreEqual(0, d.Count);
+            Assert.Equal(0, d.Count);
         }
 
-        [Test]
+        [Fact]
         public void ParseQueryString_only_question_mark() {
             var d = UrlHelperExtensions.ParseQueryString("?");
-            Assert.AreEqual(0, d.Count);            
+            Assert.Equal(0, d.Count);            
         }
 
-        [Test]
+        [Fact]
         public void ParseQueryString_admits_question_mark() {
             var d = UrlHelperExtensions.ParseQueryString("?pep=1");
-            Assert.AreEqual(1, d.Count);
-            Assert.AreEqual("1", d["pep"]);
+            Assert.Equal(1, d.Count);
+            Assert.Equal("1", d["pep"]);
         }
 
-        [Test]
+        [Fact]
         public void ParseQueryString_admits_no_question_mark() {
             var d = UrlHelperExtensions.ParseQueryString("pep=1");
-            Assert.AreEqual(1, d.Count);
-            Assert.AreEqual("1", d["pep"]);
+            Assert.Equal(1, d.Count);
+            Assert.Equal("1", d["pep"]);
         }
 
-        [Test]
+        [Fact]
         public void ParseQueryString_is_case_insensitive() {
             var d = UrlHelperExtensions.ParseQueryString("?pep=1&Nothing=bla");
-            Assert.AreEqual(2, d.Count);
-            Assert.AreEqual("1", d["PeP"]);
-            Assert.AreEqual("1", d["pep"]);
-            Assert.AreEqual("bla", d["nothing"]);
+            Assert.Equal(2, d.Count);
+            Assert.Equal("1", d["PeP"]);
+            Assert.Equal("1", d["pep"]);
+            Assert.Equal("bla", d["nothing"]);
         }
 
-        [Test]
+        [Fact]
         public void ParseQueryString_url_decodes() {
             var d = UrlHelperExtensions.ParseQueryString("?pep=1&Nothing=%3D%25");
-            Assert.AreEqual(2, d.Count);
-            Assert.AreEqual("=%", d["nothing"]);
+            Assert.Equal(2, d.Count);
+            Assert.Equal("=%", d["nothing"]);
         }
 
-        [Test]
+        [Fact]
         public void ParseQueryString_admits_empty_parameters() {
             var d = UrlHelperExtensions.ParseQueryString("?pep=&Nothing=");
-            Assert.AreEqual(2, d.Count);
-            Assert.AreEqual("", d["pep"]);
-            Assert.AreEqual("", d["Nothing"]);
+            Assert.Equal(2, d.Count);
+            Assert.Equal("", d["pep"]);
+            Assert.Equal("", d["Nothing"]);
         }
 
-        [Test]
+        [Fact]
         public void ParseQueryString_admits_extra_ampersands() {
             var d = UrlHelperExtensions.ParseQueryString("?&pep=&&&Nothing=&");
-            Assert.AreEqual(2, d.Count);
-            Assert.AreEqual("", d["pep"]);
-            Assert.AreEqual("", d["Nothing"]);
+            Assert.Equal(2, d.Count);
+            Assert.Equal("", d["pep"]);
+            Assert.Equal("", d["Nothing"]);
         }
 
-        [Test]
+        [Fact]
         public void ParseQueryString_admits_duplicate_parameters_but_keeps_last() {
             var d = UrlHelperExtensions.ParseQueryString("pep=1&pep=2");
-            Assert.AreEqual(1, d.Count);
-            Assert.AreEqual("2", d["pep"]);
+            Assert.Equal(1, d.Count);
+            Assert.Equal("2", d["pep"]);
         }
 
-        [Test]
+        [Fact]
         public void DictToQuerystring_empty() {
             var s = UrlHelperExtensions.DictToQuerystring(new Dictionary<string, string>());
-            Assert.AreEqual("", s);
+            Assert.Equal("", s);
         }
 
-        [Test]
+        [Fact]
         public void DictToQuerystring_empty_key() {
             var s = UrlHelperExtensions.DictToQuerystring(new Dictionary<string, string> {
                 {"", "a"},
             });
-            Assert.AreEqual("", s);
+            Assert.Equal("", s);
         }
 
-        [Test]
+        [Fact]
         public void DictToQuerystring_url_encodes() {
             var s = UrlHelperExtensions.DictToQuerystring(new Dictionary<string, string> {
                 {"pp", "=="},
             });
-            Assert.AreEqual("pp=%3d%3d", s);
+            Assert.Equal("pp=%3d%3d", s);
         }
 
-        [Test]
+        [Fact]
         public void DictToQuerystring_many_params() {
             var s = UrlHelperExtensions.DictToQuerystring(new Dictionary<string, string> {
                 {"pp", "1"},
                 {"two", "two2"},
             });
-            Assert.AreEqual("pp=1&two=two2", s);
+            Assert.Equal("pp=1&two=two2", s);
         }
 
-        [Test]
+        [Fact]
         public void DictToQuerystring_null_value() {
             var s = UrlHelperExtensions.DictToQuerystring(new Dictionary<string, string> {
                 {"pp", null},
             });
-            Assert.AreEqual("pp=", s);
+            Assert.Equal("pp=", s);
         }
 
     }
