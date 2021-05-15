@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SampleSolrApp.Models;
+using SolrNet;
 
 namespace SampleSolrApp.Controllers
 {
@@ -17,9 +19,12 @@ namespace SampleSolrApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var solr = SolrNet.Startup.Container.GetInstance<ISolrReadOnlyOperations<Product>>();
+            var results = await solr.QueryAsync("*:*");
+            var model = new SearchResultsModel(results);
+            return View(model);
         }
     }
 }

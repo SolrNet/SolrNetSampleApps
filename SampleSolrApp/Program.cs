@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SampleSolrApp.Models;
 
 namespace SampleSolrApp
 {
@@ -13,6 +14,7 @@ namespace SampleSolrApp
     {
         public static void Main(string[] args)
         {
+            SolrNet.Startup.Init<Product>("http://localhost:8983/solr/techproducts");
             CreateHostBuilder(args).Build().Run();
         }
 
