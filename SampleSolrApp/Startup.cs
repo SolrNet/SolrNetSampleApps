@@ -40,7 +40,6 @@ namespace SampleSolrApp
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
