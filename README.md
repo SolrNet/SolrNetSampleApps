@@ -1,0 +1,2 @@
+# Sample SolrNet app
+

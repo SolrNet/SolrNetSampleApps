@@ -15,8 +15,8 @@ namespace SampleSolrApp.Models
         [SolrField("name")]
         public ICollection<string> Name { get; set; }
 
-        [SolrField("manu_exact")]
-        public string Manufacturer { get; set; }
+        [SolrField("manu_str")]
+        public ICollection<string> Manufacturer { get; set; }
 
         [SolrField("cat")]
         public ICollection<string> Categories { get; set; }

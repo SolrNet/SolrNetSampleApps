@@ -3,10 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="SolrNet" Version="1.0.19" />
+      <PackageReference Include="SolrNet.Microsoft.DependencyInjection" Version="1.0.19" />
     </ItemGroup>
 
     <ItemGroup>

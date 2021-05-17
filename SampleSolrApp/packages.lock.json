@@ -12,6 +12,16 @@
           "SolrNet.Core": "1.0.19"
         }
       },
+      "SolrNet.Microsoft.DependencyInjection": {
+        "type": "Direct",
+        "requested": "[1.0.19, )",
+        "resolved": "1.0.19",
+        "contentHash": "wO5WTNZZNKUgrXQW5V255XJ9I5Qqa6cSVqv4iVBvAXvSodd2M0kPS/OA/mZSVKIkXj+359PfOIagVeMeM0rsTA==",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0",
+          "SolrNet.Core": "1.0.19"
+        }
+      },
       "CommonServiceLocator": {
         "type": "Transitive",
         "resolved": "2.0.2",
@@ -117,6 +127,11 @@
           "System.Runtime.InteropServices": "4.3.0",
           "System.Threading": "4.3.0"
         }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions": {
+        "type": "Transitive",
+        "resolved": "2.0.0",
+        "contentHash": "eUdJ0Q/GfVyUJc0Jal5L1QZLceL78pvEM9wEKcHeI24KorqMDoVX+gWsMGLulQMfOwsUaPtkpQM2pFERTzSfSg=="
       },
       "Microsoft.NETCore.App": {
         "type": "Transitive",

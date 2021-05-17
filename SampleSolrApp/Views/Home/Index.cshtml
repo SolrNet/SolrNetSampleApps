@@ -1,11 +1,78 @@
-﻿@model SampleSolrApp.Models.SearchResultsModel
-<div class="text-center">
-        @foreach (var r in Model.Results)
-        {
-            <div class="card">
-                <div class="card-body">
-                    @r.Name?.FirstOrDefault()
+﻿@using SampleSolrApp.Helpers
+@using SampleSolrApp.Controllers
+@model SampleSolrApp.Models.SearchResultsModel
+<div class="container">
+    <div class="row row-cols-2">
+        <div class="col-3">
+            @if (Model.Parameters.Filters.Any())
+            {
+                <div>
+                    <ul class="p-0">
+                        @foreach (var f in Model.Parameters.Filters)
+                        {
+                            <li class="badge badge-secondary">
+                                <a class="text-light text-decoration-none" href="@Url.RemoveFilter(f.Key)">
+                                    @HomeController.AllFacetFields[f.Key] : @f.Value
+                                    <i class="fa fa-times-circle"></i>
+                                </a>
+                            </li>
+                        }
+                    </ul>
                 </div>
+            }
+            @foreach (var f in Model.Facets)
+            {
+                <div>@f.FriendlyName</div>
+                <ul>
+                    @foreach (var fv in f.Values)
+                    {
+                        <li>
+                            <a href="@Url.SetFacet(f.Key, fv.Value)">@fv.Value</a>
+                            (@fv.Count)
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+        <div class="col-9">
+            <ul class="pagination">
+                <li class="page-item @(Model.Parameters.EffectivePageIndex == 1 ? "disabled" : "")">
+                    <a class="page-link" aria-label="Previous"
+                       href="@Url.SetPageIndex(Model.Parameters, Model.Parameters.EffectivePageIndex - 1)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @foreach (var p in Model.Pages)
+                {
+                    <li class="page-item @(p == Model.Parameters.EffectivePageIndex ? "active" : "")">
+                        <a class="page-link" href="@Url.SetPageIndex(Model.Parameters, p)">@p</a>
+                    </li>
+                }
+                <li class="page-item @(Model.Parameters.EffectivePageIndex == Model.LastPage ? "disabled" : "")">
+                    <a class="page-link" aria-label="Next"
+                       href="@Url.SetPageIndex(Model.Parameters, Model.Parameters.EffectivePageIndex + 1)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+            <div>
+                Viewing results @(Model.Parameters.Start + 1) - @(Model.Parameters.Start + Model.Results.Count) of @Model.NumFound
             </div>
-        }
+            @foreach (var r in Model.Results)
+            {
+                <div class="card shadow-sm rounded m-3 p-2">
+                    <div class="card-title">@r.Name.First()</div>
+                    <div class="card-body">
+                        @r.Price.ToString("C")<br/>
+                        Categories:
+                        @foreach (var cat in r.Categories ?? Array.Empty<string>())
+                        {
+                            <span class="badge badge-secondary">@cat</span>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
 </div>

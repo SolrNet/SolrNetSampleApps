@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
+using SampleSolrApp.Helpers;
+using SampleSolrApp.Models;
+using SolrNet;
+using SolrNet.Microsoft.DependencyInjection;
 
 namespace SampleSolrApp
 {
@@ -24,19 +24,26 @@ namespace SampleSolrApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSolrNet<Product>("http://localhost:8983/solr/techproducts");
+
+            services.Replace(new ServiceDescriptor(
+                typeof(ISolrInjectedConnection<Product>),
+                s =>
+                {
+                    var logConn = new LoggingConnection(s.GetRequiredService<ISolrConnection>(), s.GetRequiredService<ILogger<LoggingConnection>>());
+                    return new BasicInjectionConnection<Product>(logConn);
+                },
+                ServiceLifetime.Singleton
+            ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
-
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
