@@ -4,22 +4,22 @@
     ".NETCoreApp,Version=v5.0": {
       "SolrNet": {
         "type": "Direct",
-        "requested": "[1.0.19, )",
-        "resolved": "1.0.19",
-        "contentHash": "vOsy7hA3OrbyAkvL2vTmAkwzDYQzraeC8AwsaVktsmLRjifbR08DByrZ41B77c16XvjPOAimXMa/KQk7tfe0ng==",
+        "requested": "[1.1.0, )",
+        "resolved": "1.1.0",
+        "contentHash": "K1gPZKuVfvAhvL0aDo1Bqf4uqlcRfNq4eqbCGeOaz3jcM4Wjq6kge1LynXdhduN4/vmc57TVjVyVTQ4IqvW+2Q==",
         "dependencies": {
           "CommonServiceLocator": "2.0.2",
-          "SolrNet.Core": "1.0.19"
+          "SolrNet.Core": "1.1.0"
         }
       },
       "SolrNet.Microsoft.DependencyInjection": {
         "type": "Direct",
-        "requested": "[1.0.19, )",
-        "resolved": "1.0.19",
-        "contentHash": "wO5WTNZZNKUgrXQW5V255XJ9I5Qqa6cSVqv4iVBvAXvSodd2M0kPS/OA/mZSVKIkXj+359PfOIagVeMeM0rsTA==",
+        "requested": "[1.1.0, )",
+        "resolved": "1.1.0",
+        "contentHash": "XMNAVniNCFNkTkzspGwWQG34ZYQI8jQ/B8rB5rMyQVALEito+U/yRkDNGGOeAzABugPYR0cnrJr/hrNkgeYURQ==",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0",
-          "SolrNet.Core": "1.0.19"
+          "SolrNet.Core": "1.1.0"
         }
       },
       "CommonServiceLocator": {
@@ -473,8 +473,8 @@
       },
       "SolrNet.Core": {
         "type": "Transitive",
-        "resolved": "1.0.19",
-        "contentHash": "Sy0f53KwVehE65bSVsmNfaYa5SDyQdsMkBD3oPvsMCnAOwXy7ZnXhnYHEbGM8z3akdhxa7/gR0JaAoIN2fKBeA==",
+        "resolved": "1.1.0",
+        "contentHash": "E4JQmHuqMRIYFp05YTEcV/WgoMzKEJL3FjlriYPtOPdAVddWCLX1nE+D6LgabB2NT3rweqLcMwjA4ZyY5ozgug==",
         "dependencies": {
           "Newtonsoft.Json": "10.0.3"
         }

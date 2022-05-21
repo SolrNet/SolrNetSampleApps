@@ -18,7 +18,7 @@ namespace SampleSolrApp.Models
     public record SearchResultsModel(
         IReadOnlyList<Product> Results,
         IReadOnlyList<FacetModel> Facets,
-        int NumFound,
+        long NumFound,
         SearchParameters Parameters
     )
     {
