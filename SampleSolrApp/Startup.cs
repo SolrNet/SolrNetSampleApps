@@ -24,7 +24,7 @@ namespace SampleSolrApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSolrNet<Product>("http://localhost:8983/solr/techproducts");
+            services.AddSolrNet<Product>($"http://{Program.Solr.Value.Hostname}:{Program.Solr.Value.GetMappedPublicPort(8983)}/solr/techproducts");
 
             services.Replace(new ServiceDescriptor(
                 typeof(ISolrInjectedConnection<Product>),
