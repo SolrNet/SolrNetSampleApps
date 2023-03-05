@@ -28,9 +28,9 @@ namespace SampleSolrApp
             using var consumer = Consume.RedirectStdoutAndStderrToStream(new MemoryStream(), new MemoryStream());
             var container = new ContainerBuilder()
                 .WithName("SampleSolrApp-Solr-" + Guid.NewGuid())
-                .WithImage("solr:8.8.2")
+                .WithImage("solr:9.1.1")
                 .WithPortBinding(8983, assignRandomHostPort: true)
-                .WithCommand("/opt/docker-solr/scripts/solr-precreate", "techproducts")
+                .WithCommand("/opt/solr/docker/scripts/solr-precreate", "techproducts")
                 .WithOutputConsumer(consumer)
                 .WithWaitStrategy(Wait.ForUnixContainer().UntilMessageIsLogged(consumer.Stdout, "Registered new searcher"))
                 .WithAutoRemove(true)
