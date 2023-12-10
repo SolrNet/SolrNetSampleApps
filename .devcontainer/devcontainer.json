@@ -1,38 +1,30 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
-  "name": "SolrNet",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
-
-  // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "6.0"
+    },
+    "ghcr.io/devcontainers/features/nix:1": {
+      "version": "2.19.1",
+      "extraNixConfig": "experimental-features = nix-command flakes"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:1": {
+        "version": "latest",
+        "moby": true
+    }
+  },
 
   // Configure tool-specific properties.
   "customizations": {
     // Configure properties specific to VS Code.
     "vscode": {
-      "settings": {},
+      "settings": {
+        "editor.fontFamily": "monospace"
+      },
       "extensions": [
+        "ms-dotnettools.csdevkit"
       ]
     }
   },
-
-  // Use 'portsAttributes' to set default properties for specific forwarded ports. 
-  // More info: https://containers.dev/implementors/json_reference/#port-attributes
-  "portsAttributes": {
-    "5000": {
-      "label": "Sample app",
-      "onAutoForward": "notify"
-    }
-  },
-
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [5000],
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "dotnet restore",
-
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  "remoteUser": "root"
+  "forwardPorts": []
 }
