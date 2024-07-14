@@ -28,7 +28,7 @@ namespace SampleSolrApp
             using var consumer = Consume.RedirectStdoutAndStderrToStream(new MemoryStream(), new MemoryStream());
             var container = new ContainerBuilder()
                 .WithName("SampleSolrApp-Solr-" + Guid.NewGuid())
-                .WithImage("solr:9.4.0")
+                .WithImage("solr:9.6.1")
                 .WithPortBinding(8983, assignRandomHostPort: true)
                 .WithCommand("/opt/solr/docker/scripts/solr-precreate", "techproducts")
                 .WithOutputConsumer(consumer)
