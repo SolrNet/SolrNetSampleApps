@@ -13,7 +13,7 @@
   outputs = { self, nixpkgs, devenv, systems, ... } @ inputs:
     let
       forEachSystem = nixpkgs.lib.genAttrs (import systems);
-      dotnet = pkgs: pkgs.dotnet-sdk_6;
+      dotnet = pkgs: pkgs.dotnet-sdk_8;
     in
     {
       packages = forEachSystem (system:
