@@ -13,12 +13,25 @@
   outputs = { self, nixpkgs, devenv, systems, ... } @ inputs:
     let
       forEachSystem = nixpkgs.lib.genAttrs (import systems);
-      packagesf = pkgs: with pkgs; [
-        dotnet-sdk_6
-        bashInteractive
-      ];
+      dotnet = pkgs: pkgs.dotnet-sdk_6;
     in
     {
+      packages = forEachSystem (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = pkgs.writeShellScriptBin "dotnet-run" ''
+            cd SampleSolrApp
+            ${dotnet pkgs}/bin/dotnet run -v minimal
+          '';
+
+          build = pkgs.writeShellScriptBin "dotnet-run" ''
+            ${dotnet pkgs}/bin/dotnet build
+          '';
+        }
+      );
+
       devShells = forEachSystem
         (system:
           let
@@ -30,7 +43,10 @@
               modules = [
                 {
                   # https://devenv.sh/reference/options/
-                  packages = packagesf pkgs ++ [
+                  packages = [
+                    (dotnet pkgs)
+                    pkgs.bashInteractive
+                  ] ++ [
                     (pkgs.vscode-with-extensions.override {
                         vscodeExtensions = with pkgs.vscode-extensions; [
                           ms-dotnettools.csharp
